@@ -1,6 +1,7 @@
 class Bridge {
   constructor(nlink, pointA) {
     this.nlink = nlink;
+    this.img = loadImage("./assets/wood.png")
     const group = Body.nextGroup(true);
     const rects = Composites.stack(100, 100, this.nlink, 1, 5, 5, function(
       x,
@@ -12,7 +13,7 @@ class Bridge {
     });
 
     this.pointA = pointA;
-    this.body = Composites.chain(rects, 0.1, 0, -0.6, 0, {
+    this.body = Composites.chain(rects, 0.1, 0, -0.1, 0, {
       stiffness: 0.8,
       length: 10,
       render: { type: "line" }
@@ -26,25 +27,26 @@ class Bridge {
         bodyB: rects.bodies[0],
         pointB: { x: -25, y: 0 },
         length: 10,
-        stiffness: 0.1
+        stiffness: 0.05
       })
     ]);
   }
 
   break() {
     
-    Matter.Composite.clear(this.rope,true);
-    this.body = null;
+    Matter.Composite.clear(this.body,true);
+   // this.body = null;
   }
 
   show() {
     if (this.body != null) {
       for (let i = 0; i < this.body.bodies.length - 1; i++) {
-        this.drawVertices(this.body.bodies[i].vertices);
+        //this.drawVertices(this.body.bodies[i].vertices);
+        image(this.img,this.body.bodies[i].position.x,this.body.bodies[i].position.y,70,15);
       }
     }
   }
-
+/*
   drawVertices(vertices) {
     beginShape();
     fill("#FFF717");
@@ -88,4 +90,5 @@ class Bridge {
       pop();
     }
   }
+    */
 }

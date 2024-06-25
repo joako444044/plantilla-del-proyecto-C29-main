@@ -9,17 +9,17 @@ class Stone {
     this.h = h;
     this.color = color;
     World.add(world, this.body);
+    this.img = loadImage("./assets/stone.png")
   }
 
   show() {
     let pos = this.body.position;
     push();
     translate(pos.x, pos.y);
-    strokeWeight(1);
-    fill("white");
-    ellipseMode(CENTER);
-    ellipse(0, 0, this.w, this.h);
-    noStroke();
+    
+    imageMode(CENTER);
+    image(this.img,0, 0, this.w, this.h);
+    
     pop();
   }
 }
